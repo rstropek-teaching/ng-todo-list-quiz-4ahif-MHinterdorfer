@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/debounceTime';
 
 interface IPerson {
   name: string;
@@ -20,9 +21,11 @@ interface IToDo {
 })
 
 export class AppComponent {
-  displayedColumns = ['description', 'assignedTo', 'done', 'delete'];
+  displayedColumns = ['description', 'assignedTo', 'done', 'edit', 'delete'];
   public people: Observable<IPerson[]>;
   public todos: Observable<IToDo[]>;
+  showEditForm: boolean = false;
+  id; description; assignedTo; done: boolean;
 
   constructor(private httpClient: HttpClient) {
     this.refresh();
@@ -35,6 +38,7 @@ export class AppComponent {
       result => console.log(result),
       error => console.log(error)
     );
+    this.refresh();
   }
 
   deleteToDo(id) {
@@ -44,10 +48,31 @@ export class AppComponent {
         this.refresh();
       }
     );
-
   }
 
-  refresh(){
+  enableEditForm(id, description, assignedTo, done) {
+    this.id = id;
+    this.description = description;
+    this.assignedTo = assignedTo;
+    this.done = done;
+    this.showEditForm = true;
+  }
+
+  editItem(itemDescription, itemAssignedTo, itemDone) {
+    this.httpClient.patch('http://localhost:8080/api/todos/' + this.id, {
+      "description": itemDescription,
+      "assignedTo": itemAssignedTo,
+      "done": itemDone
+    }).subscribe(
+      result => console.log(result),
+      error => console.log(error)
+    );
+
+    this.showEditForm = false;
+    this.refresh();
+  }
+
+  refresh() {
     this.getToDos();
     this.getPeople();
   }

@@ -1,7 +1,27 @@
+<div *ngIf="showEditForm">
+  <mat-form-field>
+    <input matInput placeholder="Description" [value]="description" #itemDescription required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Assigned To" [(value)]="assignedTo" #itemAssignedTo>
+      <mat-option *ngFor="let person of people | async" [(value)]="person.name">
+        {{person.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-checkbox [checked]="done" (change)="changeDoneFlag($event, id)"></mat-checkbox>
+  
+  <button mat-raised-button (click)="editItem(itemDescription.value, itemAssignedTo.value)" [disabled]="!itemDescription.value">Save</button>
+  
+  <button mat-raised-button (click)="showEditForm = false">Cancel</button>
+</div>
+
 <mat-table #table [dataSource]="todos">
   <ng-container matColumnDef="description">
     <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-    <mat-cell *matCellDef="let item"> {{item.description}} </mat-cell>
+    <mat-cell *matCellDef="let item">{{item.description}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="assignedTo">
@@ -13,6 +33,13 @@
     <mat-header-cell *matHeaderCellDef> Done </mat-header-cell>
     <mat-cell *matCellDef="let item">
       <mat-checkbox [checked]="item.done" (change)="changeDoneFlag($event, item.id)"></mat-checkbox>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+    <mat-cell *matCellDef="let item">
+      <button mat-raised-button (click)="enableEditForm(item.id, item.description, item.assignedTo, item.done)">Edit</button>
     </mat-cell>
   </ng-container>
 
