@@ -1,4 +1,4 @@
-<div *ngIf="showUserForm">
+<div *ngIf="showUserForm" class="login-div">
   <mat-form-field>
     <mat-select placeholder="User" (value)="user" #itemUser>
       <mat-option *ngFor="let person of people | async" [(value)]="person.name">
@@ -12,7 +12,7 @@
   </button>
 </div>
 
-<div *ngIf="!showUserForm">
+<div *ngIf="!showUserForm" class="form">
   <h1>Hello {{user}}!</h1>
 
   <button mat-raised-button (click)="showUserForm = true">
@@ -20,7 +20,7 @@
   </button>
 </div>
 
-<div *ngIf="showEditForm">
+<div *ngIf="showEditForm" class="form">
   <mat-form-field>
     <input matInput placeholder="Description" [value]="description" #itemDescription required>
   </mat-form-field>
@@ -44,7 +44,7 @@
   </button>
 </div>
 
-<div *ngIf="showAddForm">
+<div *ngIf="showAddForm" class="form">
   <mat-form-field>
     <input matInput placeholder="Description" #itemDescription required>
   </mat-form-field>
@@ -66,7 +66,7 @@
   </button>
 </div>
 
-<div *ngIf="!showUserForm">
+<div *ngIf="!showUserForm" class="table">
   <mat-table #table [dataSource]="todos">
     <ng-container matColumnDef="description">
       <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
@@ -103,13 +103,13 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
-  <button mat-raised-button (click)="enableAddForm()">
+  <button mat-raised-button (click)="enableAddForm()" class="options">
     Add new ToDo Item
   </button>
-  <mat-checkbox [(ngModel)]="showOnlyUndone" (change)="filterItems()" [disabled]="!user">
+  <mat-checkbox [(ngModel)]="showOnlyUndone" (change)="filterItems()" [disabled]="!user" class="options">
     Show Only Undone
   </mat-checkbox>
-  <mat-checkbox [(ngModel)]="showOnlyAssigned" (change)="filterItems()" [disabled]="!user">
+  <mat-checkbox [(ngModel)]="showOnlyAssigned" (change)="filterItems()" [disabled]="!user" class="options">
     Show Only Assigned
   </mat-checkbox>
 </div>
