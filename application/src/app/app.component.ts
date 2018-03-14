@@ -24,6 +24,8 @@ interface IToDo {
 export class AppComponent {
   displayedColumns = ['description', 'assignedTo', 'done', 'edit', 'delete'];
 
+  API_URL: string = 'http://localhost:8080/api/';
+
   public people: Observable<IPerson[]>;
   public todos: Observable<IToDo[]>;
 
@@ -37,13 +39,14 @@ export class AppComponent {
 
   user = null;
 
+  
   constructor(private httpClient: HttpClient) {
     this.refresh();
   }
 
   //set done true or false
   changeDoneFlag(checkbox, id) {
-    this.httpClient.patch<IToDo>('http://localhost:8080/api/todos/' + id, {
+    this.httpClient.patch<IToDo>(this.API_URL + 'todos/' + id, {
       "done": checkbox.checked
     }).subscribe(
       result => console.log(result),
@@ -54,7 +57,7 @@ export class AppComponent {
 
   //delete specific item
   deleteToDo(id) {
-    this.httpClient.delete<IToDo>('http://localhost:8080/api/todos/' + id).subscribe(
+    this.httpClient.delete<IToDo>(this.API_URL + 'todos/' + id).subscribe(
       result => console.log(result),
       error => console.log(error),
       () => this.refresh()
@@ -63,7 +66,7 @@ export class AppComponent {
 
   //add items
   addItem(itemDescription, itemAssignedTo) {
-    this.httpClient.post<IToDo>('http://localhost:8080/api/todos', {
+    this.httpClient.post<IToDo>(this.API_URL + 'todos', {
       "description": itemDescription,
       "assignedTo": itemAssignedTo
     }).subscribe(
@@ -90,7 +93,7 @@ export class AppComponent {
 
   //edit item with specific parameters
   editItem(itemDescription, itemAssignedTo, itemDone) {
-    this.httpClient.patch<IToDo>('http://localhost:8080/api/todos/' + this.id, {
+    this.httpClient.patch<IToDo>(this.API_URL + 'todos/' + this.id, {
       "description": itemDescription,
       "assignedTo": itemAssignedTo,
       "done": itemDone
@@ -109,22 +112,22 @@ export class AppComponent {
   }
 
   getToDos() {
-    this.todos = this.httpClient.get<IToDo[]>('http://localhost:8080/api/todos');
+    this.todos = this.httpClient.get<IToDo[]>(this.API_URL + 'todos');
   }
 
   getPeople() {
-    this.people = this.httpClient.get<IPerson[]>('http://localhost:8080/api/people');
+    this.people = this.httpClient.get<IPerson[]>(this.API_URL + 'people');
   }
 
   filterItems() {
     if (this.showOnlyUndone && this.showOnlyAssigned == false) {
-      this.todos = this.httpClient.get<IToDo[]>('http://localhost:8080/api/todos')
+      this.todos = this.httpClient.get<IToDo[]>(this.API_URL + 'todos')
         .map(item => item.filter(element => element.done === false || element.done === null));
     } else if (this.showOnlyUndone == false && this.showOnlyAssigned) {
-      this.todos = this.httpClient.get<IToDo[]>('http://localhost:8080/api/todos')
+      this.todos = this.httpClient.get<IToDo[]>(this.API_URL + 'todos')
         .map(item => item.filter(element => element.assignedTo === this.user));
     } else if (this.showOnlyUndone && this.showOnlyAssigned) {
-      this.todos = this.httpClient.get<IToDo[]>('http://localhost:8080/api/todos')
+      this.todos = this.httpClient.get<IToDo[]>(this.API_URL + 'todos')
         .map(item => item.filter(element => element.assignedTo === this.user && (element.done === false || element.done === null)));
     } else {
       this.getToDos();

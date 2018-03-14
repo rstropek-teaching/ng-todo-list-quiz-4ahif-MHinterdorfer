@@ -23,21 +23,21 @@ Feel free to extend the existing code if you need to. However, for solving this 
 
 ## Requirements
 
-1. Create a web-based UI using the *Angular* framework. Create the app on your local computer. Using *Stackblitz* is not sufficient. :white_check_mark:
+1. Create a web-based UI using the *Angular* framework. Create the app on your local computer. Using *Stackblitz* is not sufficient. 
 
-1. As a user, I want to get a list of all my todo items. The list has to contain at least the description, the assigned person (if there is one) and the done-flag. :white_check_mark:
+1. As a user, I want to get a list of all my todo items. The list has to contain at least the description, the assigned person (if there is one) and the done-flag. 
 
-1. As a user, I want to be able to filter the list of todo items so that I only see the items that are *undone*. :white_check_mark:
+1. As a user, I want to be able to filter the list of todo items so that I only see the items that are *undone*. 
 
-1. As a user, I want to be able to filter the list of todo items so that I only see the items that are assigned to me. :white_check_mark:
+1. As a user, I want to be able to filter the list of todo items so that I only see the items that are assigned to me. 
 
-1. As a user, I want to be able to combine the filters mentioned above (e.g. all todo items that are undone and assigned to me). :white_check_mark:
+1. As a user, I want to be able to combine the filters mentioned above (e.g. all todo items that are undone and assigned to me). 
 
-1. As a user, I want to be able to add a new todo item. I want to enter a description and optionally assign the new todo item to a person (drop-down list of all available people). :white_check_mark:
+1. As a user, I want to be able to add a new todo item. I want to enter a description and optionally assign the new todo item to a person (drop-down list of all available people). 
 
-1. As a user, I want to be able to edit an existing todo item. I want to be able to change description, assigned person (it has to be able to remove an assignment, too), and done-flag. :white_check_mark:
+1. As a user, I want to be able to edit an existing todo item. I want to be able to change description, assigned person (it has to be able to remove an assignment, too), and done-flag. 
 
-1. As a user, I want to be able to delete an existing todo item. :white_check_mark:
+1. As a user, I want to be able to delete an existing todo item. 
 
 ## Advanced Exercises for Extra Points
 
