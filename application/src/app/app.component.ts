@@ -23,20 +23,25 @@ interface IToDo {
 
 export class AppComponent {
   displayedColumns = ['description', 'assignedTo', 'done', 'edit', 'delete'];
+
   public people: Observable<IPerson[]>;
   public todos: Observable<IToDo[]>;
+
   showEditForm: boolean = false;
   showAddForm: boolean = false;
   showUserForm: boolean = true;
   showOnlyUndone: boolean = false;
   showOnlyAssigned: boolean = false;
+
   id; description; assignedTo; done;
+
   user = null;
 
   constructor(private httpClient: HttpClient) {
     this.refresh();
   }
 
+  //set done true or false
   changeDoneFlag(checkbox, id) {
     this.httpClient.patch<IToDo>('http://localhost:8080/api/todos/' + id, {
       "done": checkbox.checked
@@ -45,9 +50,9 @@ export class AppComponent {
       error => console.log(error),
       () => this.refresh()
     );
-
   }
 
+  //delete specific item
   deleteToDo(id) {
     this.httpClient.delete<IToDo>('http://localhost:8080/api/todos/' + id).subscribe(
       result => console.log(result),
@@ -56,6 +61,7 @@ export class AppComponent {
     );
   }
 
+  //add items
   addItem(itemDescription, itemAssignedTo) {
     this.httpClient.post<IToDo>('http://localhost:8080/api/todos', {
       "description": itemDescription,
@@ -68,6 +74,7 @@ export class AppComponent {
     this.showAddForm = false;
   }
 
+  //set parameters for edit form
   enableEditForm(id, description, assignedTo, done) {
     this.id = id;
     this.description = description;
@@ -76,10 +83,12 @@ export class AppComponent {
     this.showEditForm = true;
   }
 
+  //enable add form
   enableAddForm() {
     this.showAddForm = true;
   }
 
+  //edit item with specific parameters
   editItem(itemDescription, itemAssignedTo, itemDone) {
     this.httpClient.patch<IToDo>('http://localhost:8080/api/todos/' + this.id, {
       "description": itemDescription,
@@ -93,6 +102,7 @@ export class AppComponent {
     this.showEditForm = false;
   }
 
+  //get the items from the API
   refresh() {
     this.filterItems();
     this.getPeople();
@@ -121,6 +131,7 @@ export class AppComponent {
     }
   }
 
+  //set username for user form
   setUser(name) {
     this.user = name;
     this.showUserForm = false;

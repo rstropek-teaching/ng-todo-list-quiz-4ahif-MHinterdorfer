@@ -7,12 +7,17 @@
     </mat-select>
   </mat-form-field>
 
-  <button mat-raised-button (click)="setUser(itemUser.value)" [disabled]="!itemUser.value">Confirm</button>
+  <button mat-raised-button (click)="setUser(itemUser.value)" [disabled]="!itemUser.value">
+    Confirm
+  </button>
 </div>
 
 <div *ngIf="!showUserForm">
-  <h1>Hello {{user}}</h1>
-  <button mat-raised-button (click)="showUserForm = true">Not {{user}}?</button>
+  <h1>Hello {{user}}!</h1>
+
+  <button mat-raised-button (click)="showUserForm = true">
+    Not {{user}}?
+  </button>
 </div>
 
 <div *ngIf="showEditForm">
@@ -30,9 +35,13 @@
 
   <mat-checkbox [checked]="done" (change)="changeDoneFlag($event, id)"></mat-checkbox>
 
-  <button mat-raised-button (click)="editItem(itemDescription.value, itemAssignedTo.value)" [disabled]="!itemDescription.value">Save</button>
+  <button mat-raised-button (click)="editItem(itemDescription.value, itemAssignedTo.value)" [disabled]="!itemDescription.value">
+    Save
+  </button>
 
-  <button mat-raised-button (click)="showEditForm = false">Cancel</button>
+  <button mat-raised-button (click)="showEditForm = false">
+    Cancel
+  </button>
 </div>
 
 <div *ngIf="showAddForm">
@@ -48,9 +57,13 @@
     </mat-select>
   </mat-form-field>
 
-  <button mat-raised-button (click)="addItem(itemDescription.value, itemAssignedTo.value)" [disabled]="!itemDescription.value">Save</button>
+  <button mat-raised-button (click)="addItem(itemDescription.value, itemAssignedTo.value)" [disabled]="!itemDescription.value">
+    Save
+  </button>
 
-  <button mat-raised-button (click)="showAddForm = false">Cancel</button>
+  <button mat-raised-button (click)="showAddForm = false">
+    Cancel
+  </button>
 </div>
 
 <div *ngIf="!showUserForm">
@@ -90,7 +103,13 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
-  <button mat-raised-button (click)="enableAddForm()">Add new ToDo Item</button>
-  <mat-checkbox [(ngModel)]="showOnlyUndone" (change)="filterItems()" [disabled]="!user">Show Only Undone</mat-checkbox>
-  <mat-checkbox [(ngModel)]="showOnlyAssigned" (change)="filterItems()" [disabled]="!user">Show Only Assigned</mat-checkbox>
+  <button mat-raised-button (click)="enableAddForm()">
+    Add new ToDo Item
+  </button>
+  <mat-checkbox [(ngModel)]="showOnlyUndone" (change)="filterItems()" [disabled]="!user">
+    Show Only Undone
+  </mat-checkbox>
+  <mat-checkbox [(ngModel)]="showOnlyAssigned" (change)="filterItems()" [disabled]="!user">
+    Show Only Assigned
+  </mat-checkbox>
 </div>
