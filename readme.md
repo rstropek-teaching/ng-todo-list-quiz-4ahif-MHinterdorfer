@@ -29,9 +29,9 @@ Feel free to extend the existing code if you need to. However, for solving this 
 
 1. As a user, I want to be able to filter the list of todo items so that I only see the items that are *undone*. :white_check_mark:
 
-1. As a user, I want to be able to filter the list of todo items so that I only see the items that are assigned to me.
+1. As a user, I want to be able to filter the list of todo items so that I only see the items that are assigned to me. :white_check_mark:
 
-1. As a user, I want to be able to combine the filters mentioned above (e.g. all todo items that are undone and assigned to me).
+1. As a user, I want to be able to combine the filters mentioned above (e.g. all todo items that are undone and assigned to me). :white_check_mark:
 
 1. As a user, I want to be able to add a new todo item. I want to enter a description and optionally assign the new todo item to a person (drop-down list of all available people). :white_check_mark:
 
