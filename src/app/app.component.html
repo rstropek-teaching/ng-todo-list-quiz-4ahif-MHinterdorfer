@@ -12,10 +12,28 @@
   </mat-form-field>
 
   <mat-checkbox [checked]="done" (change)="changeDoneFlag($event, id)"></mat-checkbox>
-  
+
   <button mat-raised-button (click)="editItem(itemDescription.value, itemAssignedTo.value)" [disabled]="!itemDescription.value">Save</button>
-  
+
   <button mat-raised-button (click)="showEditForm = false">Cancel</button>
+</div>
+
+<div *ngIf="showAddForm">
+  <mat-form-field>
+    <input matInput placeholder="Description" #itemDescription required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Assigned To" [(value)]="assignedTo" #itemAssignedTo>
+      <mat-option *ngFor="let person of people | async" [(value)]="person.name">
+        {{person.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button (click)="addItem(itemDescription.value, itemAssignedTo.value)" [disabled]="!itemDescription.value">Save</button>
+
+  <button mat-raised-button (click)="showAddForm = false">Cancel</button>
 </div>
 
 <mat-table #table [dataSource]="todos">
@@ -53,3 +71,5 @@
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
+
+<button mat-raised-button (click)="enableAddForm()">Add new ToDo Item</button>

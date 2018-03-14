@@ -25,6 +25,7 @@ export class AppComponent {
   public people: Observable<IPerson[]>;
   public todos: Observable<IToDo[]>;
   showEditForm: boolean = false;
+  showAddForm: boolean = false;
   id; description; assignedTo; done: boolean;
 
   constructor(private httpClient: HttpClient) {
@@ -32,22 +33,34 @@ export class AppComponent {
   }
 
   changeDoneFlag(checkbox, id) {
-    this.httpClient.patch('http://localhost:8080/api/todos/' + id, {
+    this.httpClient.patch<IToDo>('http://localhost:8080/api/todos/' + id, {
       "done": checkbox.checked
     }).subscribe(
       result => console.log(result),
-      error => console.log(error)
+      error => console.log(error),
+      () => this.refresh()
     );
-    this.refresh();
+    
   }
 
   deleteToDo(id) {
-    this.httpClient.delete('http://localhost:8080/api/todos/' + id).subscribe(
-      (val) => {
-        console.log(val);
-        this.refresh();
-      }
+    this.httpClient.delete<IToDo>('http://localhost:8080/api/todos/' + id).subscribe(
+      result => console.log(result),
+      error => console.log(error),
+      () => this.refresh()
     );
+  }
+
+  addItem(itemDescription, itemAssignedTo){
+    this.httpClient.post<IToDo>('http://localhost:8080/api/todos', {
+      "description": itemDescription,
+      "assignedTo": itemAssignedTo
+    }).subscribe(
+      result => console.log(result),
+      error => console.log(error),
+      () => this.refresh()
+    );
+    this.showAddForm = false;
   }
 
   enableEditForm(id, description, assignedTo, done) {
@@ -58,18 +71,21 @@ export class AppComponent {
     this.showEditForm = true;
   }
 
+  enableAddForm() {
+    this.showAddForm = true;
+  }
+
   editItem(itemDescription, itemAssignedTo, itemDone) {
-    this.httpClient.patch('http://localhost:8080/api/todos/' + this.id, {
+    this.httpClient.patch<IToDo>('http://localhost:8080/api/todos/' + this.id, {
       "description": itemDescription,
       "assignedTo": itemAssignedTo,
       "done": itemDone
     }).subscribe(
       result => console.log(result),
-      error => console.log(error)
+      error => console.log(error),
+      () => this.refresh()
     );
-
     this.showEditForm = false;
-    this.refresh();
   }
 
   refresh() {
