@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatListModule, MatTableModule, MatCheckboxModule, MatCardModule} from '@angular/material';
+import { MatListModule, MatTableModule, MatCheckboxModule, MatCardModule, MatButtonModule} from '@angular/material';
 
 
 @NgModule({
@@ -16,7 +16,7 @@ import { MatListModule, MatTableModule, MatCheckboxModule, MatCardModule} from '
     BrowserModule, 
     HttpClientModule, 
     NoopAnimationsModule, 
-    MatListModule, MatTableModule, MatCheckboxModule, MatCardModule
+    MatListModule, MatTableModule, MatCheckboxModule, MatCardModule, MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

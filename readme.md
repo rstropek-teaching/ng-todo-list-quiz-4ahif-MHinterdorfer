@@ -37,7 +37,7 @@ Feel free to extend the existing code if you need to. However, for solving this 
 
 1. As a user, I want to be able to edit an existing todo item. I want to be able to change description, assigned person (it has to be able to remove an assignment, too), and done-flag.
 
-1. As a user, I want to be able to delete an existing todo item.
+1. As a user, I want to be able to delete an existing todo item. :white_check_mark:
 
 ## Advanced Exercises for Extra Points
 
