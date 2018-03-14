@@ -28,4 +28,11 @@ export class AppComponent {
     this.people = httpClient.get<IPerson[]>('http://localhost:8080/api/people');
     this.todos = httpClient.get<IToDo[]>('http://localhost:8080/api/todos');
   }
+
+  changeDoneFlag(checkbox, id){
+      this.httpClient.patch('http://localhost:8080/api/todos/' + id, {
+        "done": checkbox.checked
+      });
+  }
+
 }
