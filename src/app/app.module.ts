@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule, MatTableModule, MatCheckboxModule, MatCardModule, MatSelectModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +16,7 @@ import { MatListModule, MatTableModule, MatCheckboxModule, MatCardModule, MatSel
   imports: [
     BrowserModule,
     HttpClientModule,
-    NoopAnimationsModule,
+    NoopAnimationsModule, FormsModule,
     MatListModule, MatTableModule, MatCheckboxModule, MatCardModule, MatButtonModule, MatSelectModule, MatFormFieldModule, MatInputModule
   ],
   providers: [],

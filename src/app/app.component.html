@@ -73,3 +73,4 @@
 </mat-table>
 
 <button mat-raised-button (click)="enableAddForm()">Add new ToDo Item</button>
+<mat-checkbox [(ngModel)]="showOnlyUndone" (change)="filterItems()">Show Only Undone</mat-checkbox>

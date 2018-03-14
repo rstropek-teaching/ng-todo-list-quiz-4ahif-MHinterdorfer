@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
 
 interface IPerson {
   name: string;
@@ -26,6 +27,7 @@ export class AppComponent {
   public todos: Observable<IToDo[]>;
   showEditForm: boolean = false;
   showAddForm: boolean = false;
+  showOnlyUndone: boolean = false;
   id; description; assignedTo; done: boolean;
 
   constructor(private httpClient: HttpClient) {
@@ -99,6 +101,14 @@ export class AppComponent {
 
   getPeople() {
     this.people = this.httpClient.get<IPerson[]>('http://localhost:8080/api/people');
+  }
+
+  filterItems(){
+    if(this.showOnlyUndone){
+      this.todos = this.httpClient.get<IToDo[]>('http://localhost:8080/api/todos').map(item => item.filter(element => element.done === false || element.done == null));
+    } else{
+      this.getToDos();
+    }
   }
 
 }
