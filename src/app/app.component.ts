@@ -32,7 +32,10 @@ export class AppComponent {
   changeDoneFlag(checkbox, id){
       this.httpClient.patch('http://localhost:8080/api/todos/' + id, {
         "done": checkbox.checked
-      });
+      }).subscribe(
+        result => console.log(result),
+        error => console.log(error),
+      );
   }
 
 }
