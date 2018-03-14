@@ -20,6 +20,7 @@ interface IToDo {
 })
 
 export class AppComponent {
+  displayedColumns = ['description', 'assignedTo','done'];
   public people: Observable<IPerson[]>;
   public todos: Observable<IToDo[]>;
 

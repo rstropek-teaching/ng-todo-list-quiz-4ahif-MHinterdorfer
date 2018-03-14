@@ -1,11 +1,21 @@
-<h1>People</h1>
+<mat-table #table [dataSource]="todos">
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+    <mat-cell *matCellDef="let item"> {{item.description}} </mat-cell>
+  </ng-container>
 
-<ul>
-  <li *ngFor="let person of people | async">{{person.name}}</li>
-</ul>
+  <ng-container matColumnDef="assignedTo">
+    <mat-header-cell *matHeaderCellDef> AssignedTo </mat-header-cell>
+    <mat-cell *matCellDef="let item"> {{item.assignedTo}} </mat-cell>
+  </ng-container>
 
-<h1>ToDo's</h1>
+  <ng-container matColumnDef="done">
+    <mat-header-cell *matHeaderCellDef> Done </mat-header-cell>
+    <mat-cell *matCellDef="let item">
+      <mat-checkbox ></mat-checkbox>
+    </mat-cell>
+  </ng-container>
 
-<ul>
-  <li *ngFor="let todo of todos | async">{{todo.description}}</li>
-</ul>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
