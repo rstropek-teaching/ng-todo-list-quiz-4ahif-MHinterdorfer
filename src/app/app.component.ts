@@ -27,8 +27,11 @@ export class AppComponent {
   public todos: Observable<IToDo[]>;
   showEditForm: boolean = false;
   showAddForm: boolean = false;
+  showUserForm: boolean = true;
   showOnlyUndone: boolean = false;
-  id; description; assignedTo; done: boolean;
+  showOnlyAssigned: boolean = false;
+  id; description; assignedTo; done;
+  user = null;
 
   constructor(private httpClient: HttpClient) {
     this.refresh();
@@ -42,7 +45,7 @@ export class AppComponent {
       error => console.log(error),
       () => this.refresh()
     );
-    
+
   }
 
   deleteToDo(id) {
@@ -53,7 +56,7 @@ export class AppComponent {
     );
   }
 
-  addItem(itemDescription, itemAssignedTo){
+  addItem(itemDescription, itemAssignedTo) {
     this.httpClient.post<IToDo>('http://localhost:8080/api/todos', {
       "description": itemDescription,
       "assignedTo": itemAssignedTo
@@ -91,7 +94,7 @@ export class AppComponent {
   }
 
   refresh() {
-    this.getToDos();
+    this.filterItems();
     this.getPeople();
   }
 
@@ -103,12 +106,23 @@ export class AppComponent {
     this.people = this.httpClient.get<IPerson[]>('http://localhost:8080/api/people');
   }
 
-  filterItems(){
-    if(this.showOnlyUndone){
-      this.todos = this.httpClient.get<IToDo[]>('http://localhost:8080/api/todos').map(item => item.filter(element => element.done === false || element.done == null));
-    } else{
+  filterItems() {
+    if (this.showOnlyUndone && this.showOnlyAssigned == false) {
+      this.todos = this.httpClient.get<IToDo[]>('http://localhost:8080/api/todos')
+        .map(item => item.filter(element => element.done === false || element.done === null));
+    } else if (this.showOnlyUndone == false && this.showOnlyAssigned) {
+      this.todos = this.httpClient.get<IToDo[]>('http://localhost:8080/api/todos')
+        .map(item => item.filter(element => element.assignedTo === this.user));
+    } else if (this.showOnlyUndone && this.showOnlyAssigned) {
+      this.todos = this.httpClient.get<IToDo[]>('http://localhost:8080/api/todos')
+        .map(item => item.filter(element => element.assignedTo === this.user && (element.done === false || element.done === null)));
+    } else {
       this.getToDos();
     }
   }
 
+  setUser(name) {
+    this.user = name;
+    this.showUserForm = false;
+  }
 }
