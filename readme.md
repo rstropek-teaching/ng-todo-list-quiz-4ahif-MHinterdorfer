@@ -23,9 +23,9 @@ Feel free to extend the existing code if you need to. However, for solving this 
 
 ## Requirements
 
-1. Create a web-based UI using the *Angular* framework. Create the app on your local computer. Using *Stackblitz* is not sufficient.
+1. Create a web-based UI using the *Angular* framework. Create the app on your local computer. Using *Stackblitz* is not sufficient. :white_check_mark:
 
-1. As a user, I want to get a list of all my todo items. The list has to contain at least the description, the assigned person (if there is one) and the done-flag.
+1. As a user, I want to get a list of all my todo items. The list has to contain at least the description, the assigned person (if there is one) and the done-flag. :white_check_mark:
 
 1. As a user, I want to be able to filter the list of todo items so that I only see the items that are *undone*.
 
